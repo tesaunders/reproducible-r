@@ -1,0 +1,27 @@
+---
+title: "Reproducible & Collaborative Data Science with R"
+---
+
+[Dr Tom Saunders](https://profiles.auckland.ac.nz/tom-saunders) & [Dr Toby Johnson](https://profiles.auckland.ac.nz/toby-johnson)  
+Centre for eResearch  
+University of Auckland  
+
+Welcome to the workshop repository for Reproducible & Collaborative Data Science with R.
+
+# Getting Set Up
+
+Follow the instructions on the [set up]() page to install some software and create a GitHub account before the workshop.
+
+# Objectives
+
+The primary objective of this workshop is to equip emerging researchers with practical skills to unlock the potential of their R scripts by making their code reproducible, shareable, and citable. 
+
+Most R users do not have a background in computer science or software development, but instead come with expertise from particular research domains. This presents an opportunity to empower researchers to apply software development principles to the code they write to ensure their work has maximum impact. We will cover the following concepts in this workshop:
+
+- Organising work in projects 
+- Writing readable and modular R code 
+- Collaborating with version control 
+- Managing package dependencies 
+- Publishing software projects
+
+Each of these topics alone could easily fill a 1.5 hour workshop, so our treatment of them will necessarily be brief. But our main aim here is to introduce these concepts, show how they are used together, and walk through how to start applying them to your research projects.

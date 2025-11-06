@@ -1,0 +1,56 @@
+---
+title: "Set Up"
+output: html_document
+---
+
+# 1. Install R (or update)
+
+If using a device managed by your organisation, install R from your organisational software repository or contact your IT department for help.
+
+To download and install R on a personal machine:
+
+- [Windows](https://cran.r-project.org/bin/windows/): Select 'base', then 'Download R for Windows'. Run the installer 
+- [Mac](https://cran.r-project.org/bin/macosx/):
+- [Linux](https://cran.r-project.org/bin/linux/)
+
+# 2. Install RStudio (or update)
+
+If using a device managed by your organisation, install RStudio from your organisational software repository or contact your IT department for help.
+
+To download and install RStudio on a personal machine (requires administrator privileges):
+
+- Go [here](https://posit.co/download/rstudio-desktop/) and click 'Download RStudio Desktop' underneath '2: Install RStudio', or scroll down and select the appropriate version for your operating system.
+
+# 3. Install R packages
+
+Open RStudio and install the following R packages by:
+
+- Selecting Tools > Install Packages > and entering `readr, readxl, dplyr, ggplot2, renv` and select 'Install'.
+
+OR
+
+- Running the following command in the console:
+
+`install.packages(c("readr", "readxl", "dplyr", "ggplot2", "renv"))`
+
+# 4. Install Git
+
+Install Git on Windows:
+
+- Download and install [Git for Windows](https://gitforwindows.org/).
+- During installation, when asked about “Adjusting your PATH environment”, make sure to select “Git from the command line and also from 3rd-party software”. Otherwise, accept the default options.
+
+Install Git on Mac:
+
+- Open the Terminal app, type `git --version` and press Enter/Return. 
+- If it's not installed already, follow the instructions to Install the "command line developer tools". 
+- Do not click "Get Xcode" - it will take too long and is not necessary for our Git lesson. 
+
+Install Git on Linux:
+
+- If Git is not already available, install it via your package manager. 
+- For Debian/Ubuntu run `sudo apt-get install git` and for Fedora run `sudo dnf install git`. 
+
+# 5. Create a GitHub account
+
+Go to [github.com](https://github.com/) and create a free account. If you use your organisational email address you may be eligible for a free upgrade to [GitHub Education](https://github.com/education). If you would like to remain anonymous, choose an appropriate username and see [these instructions](help.github.com/articles/keeping-your-email-address-private/) for keeping your email address private.
