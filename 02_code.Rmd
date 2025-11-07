@@ -1,5 +1,66 @@
 ---
 title: "R Code"
-output: html_document
 ---
+
+## Writing better code
+
+We can improve our scripts by writing code which is:
+
+1. Readable
+
+- Use a consistent style guide (like the tidyverse one)
+- Be clear, concise, and consistent when naming objects, datasets, and functions
+- Break your scripts up into sections (Ctrl+Shift+R)
+
+2. Reusable
+
+- Write functions to perform sets of operations
+- Use iteration (for loops, or `map()`) 
+- Consider creating packages for data and code used in multiple places
+- Break up long scripts into separate files (cleaning, manipulating, plotting)
+
+3. Documented
+
+- Use comments to explain why you did something the way you did 
+- Include a README with each project to provide important context and background
+
+Create a new script in RStudio (Ctrl+Shift+N) and save it in the `scripts` folder.
+
+Load packages we need for the workshop.
+
+```{r}
+library(readr)
+library(readxl)
+library(dplyr)
+library(ggplot2)
+library(renv)
+```
+
+Let's take a common example of some data analysis and apply the above principles when writing the code.
+
+First, let's read in some data split into different files by month. Instead of naming each file, let's write a function which will read all files in within the `data_raw` folder, bind them together into a single dataframe, and add a new column with the file the data came from. Let's assume we only want common spreadsheet files: `.csv` and `.xls(x)`.
+
+```{r}
+csv_files <- list.files(path = "data_raw", pattern = "\\.csv$", full.names = TRUE)
+excel_files <- list.files(path = "data_raw", pattern = "\\.xls.*$", full.names = TRUE)
+
+read_data <- function(files) {
+  if (grepl("\\.csv$", files)) {
+    data <- read_csv(files)
+  } else if (grepl("\\.xls.*$", files)) {
+    data <- read_excel(files)
+  } else {
+    stop("Unsupported file type. Only CSVs and Excel files are supported.")
+  }
+}
+
+# Alternative way
+
+files <- list.files(path = "data_raw", pattern = "\\.(csv|xls.*)$", full.names = TRUE)
+
+data <- map_if(files, grepl("\\.csv$", files), read_csv, .else = read_excel)
+
+data |> bind_rows()
+```
+
 
