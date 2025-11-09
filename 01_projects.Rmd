@@ -3,3 +3,37 @@ title: "RStudio Projects"
 output: html_document
 ---
 
+## Final set up
+
+
+
+
+## Create GitHub repository & RStudio project
+
+We're going to work in an RStudio project connected to a GitHub repository. 
+
+First we create the repository in GitHub:
+
+1. Go to github.com, sign in, then click the green 'New' button. 
+2. Name it "r-data-science", leave the rest as default, then click 'create repository'. 
+3. Copy the github.com address in the 'Quick set up box'. 
+4. Open RStudio and select File -> New project -> Version control -> Git -> and paste the address into the 'Repository URL' box. 
+
+In the box called 'Create project as subdirectory of:' you need to select a location on your machine. It's a good idea to create a folder called something like 'projects' in your user folder and select this every time, to group your repositories together in the same place on your machine(s). Let's do that by clicking 'Browse', navigating to your user folder, and creating a new folder called 'projects' before selecting it and clicking 'create project'.
+
+RStudio opens a new project called `r-data-science`. RStudio projects are essentially the .RProj file - this file tells RStudio that this folder is home to the project, and to use the folder as the 'working directory', or the place where R is looking when you ask it to load data or save an output.
+
+## Set up folders
+
+Create the following folders from within RStudio:
+
+- data_raw: holds the raw, untouched data.
+- data: holds cleaned data.
+- results: holds outputs like figures or summarised data.
+- src: holds analysis script(s).
+
+There are many ways of setting up project folders, but the idea is to pick a convention and stick to it across different projects to stay organised and save time.
+
+Download this dataset and put it into `data_raw`.
+
+Create a new R script (Ctrl+Shift+N), call it `analysis.R` and save it in `src`.
