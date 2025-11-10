@@ -30,7 +30,6 @@ Load packages we need for the workshop.
 
 ```{r}
 library(readr)
-library(readxl)
 library(dplyr)
 library(ggplot2)
 library(purrr)
@@ -44,7 +43,30 @@ First, let's read in some data split into different files by month. Instead of n
 ```{r}
 files <- list.files(path = "data_raw", pattern = "\\.csv", full.names = TRUE)
 
-data <- read_csv(files, id = "source")
+surveys <- read_csv(files, id = "source")
 ```
+
+This dataset comprises measurements taken from mammals captured in the Chihuahuan desert. 
+
+Now let's create some summaries to get an overview of the data.
+
+```{r}
+
+```
+
+We can save this summary as a spreadsheet to make it more convenient to go back to the data.
+
+```{r}
+
+```
+
+Now let's do some plotting. Let's say we wanted to create a separate plot for each year showing hindfoot length vs weight. There are 13 years in the data. Instead of writing the same bit of code 13 times, this is a good time to write our own function.
+
+```{r}
+
+```
+
+
+
 
 
