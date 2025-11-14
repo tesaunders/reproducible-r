@@ -20,5 +20,3 @@ navbar:
       href: 05_publishing.html
     - text: "Resources"
       href: resources.html
-output: html_document
-output_dir: "docs"
