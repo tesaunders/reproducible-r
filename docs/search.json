@@ -1,0 +1,86 @@
+[
+  {
+    "objectID": "slides.html#objective",
+    "href": "slides.html#objective",
+    "title": "Reproducible and collaborative data science in R",
+    "section": "Objective",
+    "text": "Objective\nUnlock the full potential of your scripts by making your code reproducible, shareable, and citable.\nhttps://github.com/tesaunders/reproducible-r"
+  },
+  {
+    "objectID": "slides.html#why",
+    "href": "slides.html#why",
+    "title": "Reproducible and collaborative data science in R",
+    "section": "Why?",
+    "text": "Why?\nMost R users are not software developers.\nApplying some software development princicples enables you to:\n\nWrite readable, reproducible, maintainable code\nSave time and frustration when using and maintaining code\nReduce duplication for you and your collaborators\nMake your research reusable, transparent, and rigorous"
+  },
+  {
+    "objectID": "slides.html#problem-folders-are-a-mess",
+    "href": "slides.html#problem-folders-are-a-mess",
+    "title": "Reproducible and collaborative data science in R",
+    "section": "Problem: Folders are a mess",
+    "text": "Problem: Folders are a mess\n\nCan’t find anything quickly\nFiles are all over the place\nCan’t easily share what I’m working on"
+  },
+  {
+    "objectID": "slides.html#solution-organising-r-code-into-projects",
+    "href": "slides.html#solution-organising-r-code-into-projects",
+    "title": "Reproducible and collaborative data science in R",
+    "section": "Solution: Organising R code into projects",
+    "text": "Solution: Organising R code into projects\n\nOrganise all files into consistent folder structures\nBreak long scripts into separate files based on the tasks being performed\nAdd a README file to describe the project"
+  },
+  {
+    "objectID": "slides.html#problem-r-code-is-difficult-to-understand",
+    "href": "slides.html#problem-r-code-is-difficult-to-understand",
+    "title": "Reproducible and collaborative data science in R",
+    "section": "Problem: R code is difficult to understand",
+    "text": "Problem: R code is difficult to understand\nMany beginner programmers:\n\nDo not document their code which makes it harder to understand\nRely on assigning objects instead of piping\nAre not aware of how to write their own functions\nGet stuck with how and why to iterate"
+  },
+  {
+    "objectID": "slides.html#solution-write-clean-styled-documented-code",
+    "href": "slides.html#solution-write-clean-styled-documented-code",
+    "title": "Reproducible and collaborative data science in R",
+    "section": "Solution: Write clean, styled, documented code",
+    "text": "Solution: Write clean, styled, documented code\n\nUse comments to explain why you did something a particular way\nUse sections and subsections to organise and navigate longer scripts\nUse a consistent style (linting with {styler})\nWrite functions and iterate to do complex things at scale"
+  },
+  {
+    "objectID": "slides.html#problem-difficult-to-collaborate-on-codeanalyses",
+    "href": "slides.html#problem-difficult-to-collaborate-on-codeanalyses",
+    "title": "Reproducible and collaborative data science in R",
+    "section": "Problem: Difficult to collaborate on code/analyses",
+    "text": "Problem: Difficult to collaborate on code/analyses\n\nEmailing back and forth is inefficient"
+  },
+  {
+    "objectID": "slides.html#solution-use-a-version-control-system",
+    "href": "slides.html#solution-use-a-version-control-system",
+    "title": "Reproducible and collaborative data science in R",
+    "section": "Solution: Use a version control system",
+    "text": "Solution: Use a version control system\n\nGit - software installed on your machine which tracks versions of files\nGitHub - cloud service which allows you to share/collaborate on projects\nAll changes are kept, revertible\nFeatures like issues (to do lists), code review, automatic checks"
+  },
+  {
+    "objectID": "slides.html#problem-code-doesnt-run-after-package-updates",
+    "href": "slides.html#problem-code-doesnt-run-after-package-updates",
+    "title": "Reproducible and collaborative data science in R",
+    "section": "Problem: Code doesn’t run after package updates",
+    "text": "Problem: Code doesn’t run after package updates\n\nSometimes updates to packages break code"
+  },
+  {
+    "objectID": "slides.html#solution-manage-dependencies-with-renv",
+    "href": "slides.html#solution-manage-dependencies-with-renv",
+    "title": "Reproducible and collaborative data science in R",
+    "section": "Solution: Manage dependencies with {renv}",
+    "text": "Solution: Manage dependencies with {renv}\nrenv takes a snapshot of currently used packages within a project.\n\nA lockfile containing the data can then be added to GitHub.\nWhen someone clones the projects they can use renv to install the same package versions.\nThis makes it far more likley the code will continue to work."
+  },
+  {
+    "objectID": "slides.html#problem-many-researchers-dont-get-credit-for-their-code",
+    "href": "slides.html#problem-many-researchers-dont-get-credit-for-their-code",
+    "title": "Reproducible and collaborative data science in R",
+    "section": "Problem: Many researchers don’t get credit for their code",
+    "text": "Problem: Many researchers don’t get credit for their code\nLots of code is:\n\nnot recognised/rewarded as an output of research\nnot easily findble and reusable by others\nnot attached to results to enable reproducibility"
+  },
+  {
+    "objectID": "slides.html#solution-publish-your-code",
+    "href": "slides.html#solution-publish-your-code",
+    "title": "Reproducible and collaborative data science in R",
+    "section": "Solution: Publish your code",
+    "text": "Solution: Publish your code\nTwo good options:\n\nGitHub repositories can be connected to Zenodo to get a DOI, OR\nPublish the code or a link to the GitHub repo with FigShare or Zenodo\n\n\nCode is more easily associated with other publications\nCode is citable, and citations can be tracked\nDOIs are persistent records that will always resolve to the right place"
+  }
+]
