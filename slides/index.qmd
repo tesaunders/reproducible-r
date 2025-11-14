@@ -1,0 +1,97 @@
+---
+title: "Reproducible and collaborative data science in R"
+subtitle: "Dr Tom Saunders & Dr Toby Johnson"
+format:
+  revealjs: 
+    slide-number: true
+    logo: images/uoa.png
+    footer: "Tuesday 19 February, 2025"
+    css: styles.css
+---
+
+## Objective
+
+Unlock the full potential of your scripts by making your code reproducible, shareable, and citable.
+
+https://github.com/tesaunders/reproducible-r
+
+## Why?
+
+Most R users are not software developers. 
+
+Applying some software development princicples enables you to:
+
+- Write readable, reproducible, maintainable code
+- Save time and frustration when using and maintaining code 
+- Reduce duplication for you and your collaborators 
+- Make your research reusable, transparent, and rigorous 
+
+## Problem: Folders are a mess
+
+- Can't find anything quickly
+- Files are all over the place
+- Can't easily share what I'm working on
+
+## Solution: Organising R code into projects
+
+1. Organise all files into consistent folder structures 
+2. Break long scripts into separate files based on the tasks being performed 
+3. Add a README file to describe the project 
+
+## Problem: R code is difficult to understand
+
+Many beginner programmers:
+
+- Do not document their code which makes it harder to understand
+- Rely on assigning objects instead of piping
+- Are not aware of how to write their own functions
+- Get stuck with how and why to iterate
+
+## Solution: Write clean, styled, documented code 
+
+1. Use comments to explain why you did something a particular way 
+2. Use sections and subsections to organise and navigate longer scripts 
+3. Use a consistent style (linting with {styler}) 
+4. Write functions and iterate to do complex things at scale
+
+## Problem: Difficult to collaborate on code/analyses
+
+- Emailing back and forth is inefficient
+
+## Solution: Use a version control system
+
+- Git - software installed on your machine which tracks versions of files
+- GitHub - cloud service which allows you to share/collaborate on projects
+- All changes are kept, revertible
+- Features like issues (to do lists), code review, automatic checks
+
+## Problem: Code doesn't run after package updates
+
+- Sometimes updates to packages break code
+
+## Solution: Manage dependencies with {renv}
+
+renv takes a snapshot of currently used packages within a project.
+
+- A lockfile containing the data can then be added to GitHub.
+- When someone clones the projects they can use renv to install the same package versions.
+- This makes it far more likley the code will continue to work.
+
+## Problem: Many researchers don't get credit for their code
+
+Lots of code is:
+
+- not recognised/rewarded as an output of research
+- not easily findble and reusable by others
+- not attached to results to enable reproducibility
+
+## Solution: Publish your code
+
+Two good options:
+
+1. GitHub repositories can be connected to Zenodo to get a DOI, OR
+2. Publish the code or a link to the GitHub repo with FigShare or Zenodo
+
+- Code is more easily associated with other publications
+- Code is citable, and citations can be tracked
+- DOIs are persistent records that will always resolve to the right place

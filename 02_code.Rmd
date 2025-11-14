@@ -49,57 +49,54 @@ surveys <- read_csv(files, id = "source")
 
 This dataset comprises measurements taken from mammals captured in the Chihuahuan desert. 
 
-Now let's create some summaries to get an overview of the data.
-
+Let's say we wanted to create a separate scatterplot for each species showing hindfoot length vs weight. Even if we're only interested in species codes with at least 100 valid observations, that's still 11 plots. 
 ```{r}
-surveys |>
-  drop_na(sex, hindfoot_length, weight) |>  
-  group_by(sex) |> 
-  summarise(
-    n = n(),
-    avg_hindfoot = mean(hindfoot_length),
-    avg_weight = mean(weight)
-  )
-```
-
-```{r}
-
-```
-
-
-Now let's do some plotting. Let's say we wanted to create a separate scatterplot for each species showing hindfoot length vs weight. Even if we're only interested in species codes with at least 100 observations, that's still 15 plots. 
-
-```{r}
-species <- 
-  surveys |> 
+valid_species <-
+  surveys |>
+  drop_na(all_of(c("weight", "hindfoot_length"))) |> 
   count(species_id) |> 
   filter(n >= 100) |> 
   pull(species_id)
 ```
 
-Rather than write out the same code 15 times, this is a good time to write our own function. If we encapsulate all the plotting steps in a function, we can then use `map()` from {purrr} to apply the function over the species and create the plots.
+Rather than write out the same code 15 times, this is a good time to write our own function. If we encapsulate all the plotting steps in a function, we can then use {purrr} to apply the function over the species and create the plots.
 
 ```{r}
 # Create an example of a plot
-ggplot(surveys, aes(x = weight, y = hindfoot_length)) +
+ggplot(surveys, aes(x = weight, y = hindfoot_length, colour = sex)) +
   geom_point() +
-  theme_bw()
+  theme_minimal()
 ```
 
 ```{r}
-# Convert to a function
-plot_species <- function(data, x, y) {
-  ggplot(data = data, aes(x = x, y = y)) +
-   geom_point() +
-   theme_bw()
+plot_species <- function(data, x_var, y_var, colour, species) {
+
+  filtered_data <- 
+    data |> 
+    filter(species_id == {{ species }})
+  
+  plot_title <- paste0(y_var, " vs. ", x_var, " for Species ID: ", species)
+  
+  plot <- 
+    filtered_data |> 
+    ggplot(aes(x = .data[[x_var]], y = .data[[y_var]], colour = .data[[colour]])) +
+    geom_point(alpha = 0.6) +
+    theme_minimal()
+  
+  save_path <- paste0("figures/", species, "_", x_var, "_vs_", y_var, ".png")
+  
+  ggsave(save_path, plot = plot, width = 10, height = 6, units = "in")
 }
+
+walk(valid_species, ~ plot_species(
+  data = surveys,
+  x_var = "weight",
+  y_var = "hindfoot_length",
+  colour = "sex",
+  species = .x 
+))
 ```
 
-```{r}
-# Test the function
-plot_species(data = surveys, 
-             x = weight, 
-             y = hindfoot_length)
-```
+
 
 
