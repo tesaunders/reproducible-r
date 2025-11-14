@@ -3,5 +3,3 @@ title: "Resources"
 output: html_document
 ---
 
-[Slides](docs/slides.html)
-

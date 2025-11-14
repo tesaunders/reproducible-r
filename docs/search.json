@@ -84,13 +84,6 @@
     "text": "Solution: Publish your code\nTwo good options:\n\nGitHub repositories can be connected to Zenodo to get a DOI, OR\nPublish the code or a link to the GitHub repo with FigShare or Zenodo\n\n\nCode is more easily associated with other publications\nCode is citable, and citations can be tracked\nDOIs are persistent records that will always resolve to the right place"
   },
   {
-    "objectID": "resources.html",
-    "href": "resources.html",
-    "title": "Resources",
-    "section": "",
-    "text": "Slides"
-  },
-  {
     "objectID": "01_projects.html#create-github-repository-rstudio-project",
     "href": "01_projects.html#create-github-repository-rstudio-project",
     "title": "RStudio Projects",
