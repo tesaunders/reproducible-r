@@ -3,3 +3,20 @@ title: "Publishing"
 output: html_document
 ---
 
+Using R or another programming language to analyse your data means all the steps you've taken to get from data to results are laid out in your script. Having your code in a public GitHub repo is a great way to share that code in a way that makes it easier for others to immediately reuse it. But by 'publishing' that code (by getting a DOI) you can gain even more visibility for your software, and ensure you get credit for it.
+
+We'll discuss two options for publishing your code. Both will get you a DOI so your code becomes citable.
+
+## 1. Connect your GitHub repo with Zenodo
+
+If you already have a Zenodo account, you can [connect your GitHub](https://help.zenodo.org/docs/profile/linking-accounts/#connect). If you don't have an account already, log in to [Zenodo](https://zenodo.org/) with your GitHub account. 
+
+Then go [here](https://zenodo.org/account/settings/github/) and toggle the button next to the repo on. Zenodo will archive your repository (and will issue a new DOI each time you create a new GitHub release). 
+
+## 2. Connect your GitHub repo with FigShare
+
+If you already have a (personal or institutional) FigShare account, you can [connect your GitHub](https://info.figshare.com/user-guide/how-to-connect-figshare-with-your-github-account/). If you don't have an account already, [create one](https://figshare.com/account/register).
+
+Then go [here](https://figshare.com/account/integrations) and connect your GitHub account. Now when you go to create a new item, you can select '[Import from connected integrations](https://info.figshare.com/user-guide/how-to-connect-figshare-with-your-github-account/)' at the bottom of the upload wizard. 
+
+Now when publishing a manuscript, you can cite the DOI for the code in the data availability statement, or in the reference section if the journal doesn't use data availability statements.

@@ -124,5 +124,47 @@
     "title": "Set Up",
     "section": "",
     "text": "1. Install R (or update)\nIf using a device managed by your organisation, install R from your organisational software repository or contact your IT department for help.\nTo download and install R on a personal machine:\n\nWindows: Select ‘base’, then ‘Download R for Windows’. Run the installer\nMac:\nLinux\n\n\n\n2. Install RStudio (or update)\nIf using a device managed by your organisation, install RStudio from your organisational software repository or contact your IT department for help.\nTo download and install RStudio on a personal machine (requires administrator privileges):\n\nGo here and click ‘Download RStudio Desktop’ underneath ‘2: Install RStudio’, or scroll down and select the appropriate version for your operating system.\n\n\n\n3. Install R packages\nOpen RStudio and install the following R packages by:\n\nSelecting Tools &gt; Install Packages &gt; and entering readr, readxl, dplyr, ggplot2, renv and select ‘Install’.\n\nOR\n\nRunning the following command in the console:\n\ninstall.packages(c(\"readr\", \"readxl\", \"dplyr\", \"ggplot2\", \"renv\"))\n\n\n4. Install Git\nInstall Git on Windows:\n\nDownload and install Git for Windows.\nDuring installation, when asked about “Adjusting your PATH environment”, make sure to select “Git from the command line and also from 3rd-party software”. Otherwise, accept the default options.\n\nInstall Git on Mac:\n\nOpen the Terminal app, type git --version and press Enter/Return.\nIf it’s not installed already, follow the instructions to Install the “command line developer tools”.\nDo not click “Get Xcode” - it will take too long and is not necessary for our Git lesson.\n\nInstall Git on Linux:\n\nIf Git is not already available, install it via your package manager.\nFor Debian/Ubuntu run sudo apt-get install git and for Fedora run sudo dnf install git.\n\n\n\n5. Create a GitHub account\nGo to github.com and create a free account. If you use your organisational email address you may be eligible for a free upgrade to GitHub Education. If you would like to remain anonymous, choose an appropriate username and see these instructions for keeping your email address private."
+  },
+  {
+    "objectID": "05_publishing.html",
+    "href": "05_publishing.html",
+    "title": "Publishing",
+    "section": "",
+    "text": "Using R or another programming language to analyse your data means all the steps you’ve taken to get from data to results are laid out in your script. Having your code in a public GitHub repo is a great way to share that code in a way that makes it easier for others to immediately reuse it. But by ‘publishing’ that code (by getting a DOI) you can gain even more visibility for your software, and ensure you get credit for it.\nWe’ll discuss two options for publishing your code. Both will get you a DOI so your code becomes citable."
+  },
+  {
+    "objectID": "05_publishing.html#connect-your-github-repo-with-zenodo",
+    "href": "05_publishing.html#connect-your-github-repo-with-zenodo",
+    "title": "Publishing",
+    "section": "1. Connect your GitHub repo with Zenodo",
+    "text": "1. Connect your GitHub repo with Zenodo\nIf you already have a Zenodo account, you can connect your GitHub. If you don’t have an account already, log in to Zenodo with your GitHub account.\nThen go here and toggle the button next to the repo on. Zenodo will archive your repository (and will issue a new DOI each time you create a new GitHub release)."
+  },
+  {
+    "objectID": "05_publishing.html#connect-your-github-repo-with-figshare",
+    "href": "05_publishing.html#connect-your-github-repo-with-figshare",
+    "title": "Publishing",
+    "section": "2. Connect your GitHub repo with FigShare",
+    "text": "2. Connect your GitHub repo with FigShare\nIf you already have a (personal or institutional) FigShare account, you can connect your GitHub. If you don’t have an account already, create one.\nThen go here and connect your GitHub account. Now when you go to create a new item, you can select ‘Import from connected integrations’ at the bottom of the upload wizard.\nNow when publishing a manuscript, you can cite the DOI for the code in the data availability statement, or in the reference section if the journal doesn’t use data availability statements."
+  },
+  {
+    "objectID": "04_dependencies.html",
+    "href": "04_dependencies.html",
+    "title": "Managing Dependencies",
+    "section": "",
+    "text": "One of the benefits of using R to analyse data is gaining access to the incredible ecosystem of packages that have been developed to make it easier to perform all kinds of different analyses. Packages are often updated to fix bugs, add new functionality, or change existing functionality. Sometimes this means code breaks - something that used to work with a previous version of a package no longer works, so the code stops running. This can be frustrating and time consuming to fix. Fortunately, by smartly managing dependencies (the packages that our code depends on to work), we can largely avoid the problem."
+  },
+  {
+    "objectID": "04_dependencies.html#introducing-renv",
+    "href": "04_dependencies.html#introducing-renv",
+    "title": "Managing Dependencies",
+    "section": "Introducing renv",
+    "text": "Introducing renv\nrenv (short for r environment) makes your R projects:\n\nIsolated: Installing a new or updated package for one project won’t break your other projects, and vice versa. That’s because renv gives each project its own private package library.\nPortable: Easily transport your projects from one computer to another, even across different platforms. renv makes it easy to install the packages your project depends on.\nReproducible: renv records the exact package versions you depend on, and ensures those exact versions are the ones that get installed wherever the project goes.\n\nrenv can be installed onto your machine like any other package at any time during the lifecycle of your project. In the console:\n\ninstall.packages(\"renv\")\n\nTo use renv in your project, in the console:\n\nrenv::init()\n\nThis will set up a project library in a folder called renv, containing all the packages you’re currently using. The packages (and all the metadata needed to reinstall them) are recorded into a lockfile, renv.lock, and a .Rprofile file ensures that the library is used every time you open that project.\nAs you work on your project, you will install and upgrade packages, either using install.packages() and update.packages() or renv::install() and renv::update(). After you’ve confirmed your code works as expected, use renv::snapshot() to record the packages and their sources in an updated lockfile.\nLater, if you need to share your code with someone else or run your code on new machine, your collaborator (or you) can call renv::restore() to install the specific package versions recorded in the lockfile.\nWhen we use renv commands we use the :: notation so we don’t actually have to load the renv package, and we always enter renv commands in the console. We don’t preserve them in our script.\nThe below graphic shows a diagram of the standard workflow:"
+  },
+  {
+    "objectID": "04_dependencies.html#testing-it-out",
+    "href": "04_dependencies.html#testing-it-out",
+    "title": "Managing Dependencies",
+    "section": "Testing it out",
+    "text": "Testing it out\nRun renv::init() and you should see some activity in the console and you’ll see some new files in the Git pane.\nWe now have a renv.lock file that has recorded the packages, and their versions, that are loaded in our script (or loaded in any scripts within our project).\nLets install and load another package, as if we were going to use it in our script. In the console:\n\ninstall.packages(\"ratdat\")\n\nrenv should tell you in the console that it is going to download the package from CRAN and install it within the project/renv folder. You’ll need to hit Shift+Y to confirm. It downloads the package, installs it first into your general R package library, then moves a copy into the project/renv folder. Now let’s load it in our script as if we were going to use it.\n\nlibrary(\"ratdat\")\n\nLet’s pretend we used the package and were happy with our code. We can check the status of our project to see if renv has detected the new package.\n\nrenv::status()\n\nrenv should tell you that ratdat is installed and used, but not recorded in the lock file. To fix this we take a snapshot to update the lock file.\n\nrenv::snapshot()\n\nYou should be prompted to allow the lock file to be updated with the package (Shift+Y to confirm).\nAs we’re not actually using this package, we can remove it from our project by running:\n\nrenv::remove(\"\")\n\nAnd deleting the library(\"ratdat) call above. Now we can update our lock file again:\n\nrenv::snapshot()\n\nIf someone clones the project from GitHub, and they have renv installed, they can renv::restore() the packages within the lockfile so that these package versions will be installed into the project package library on their machine too. This means they have the same packages, and the same versions, installed in their project library as the person who created the code."
   }
 ]

@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -153,8 +187,63 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p>One of the benefits of using R to analyse data is gaining access to the incredible ecosystem of packages that have been developed to make it easier to perform all kinds of different analyses. Packages are often updated to fix bugs, add new functionality, or change existing functionality. Sometimes this means code breaks - something that used to work with a previous version of a package no longer works, so the code stops running. This can be frustrating and time consuming to fix. Fortunately, by smartly managing dependencies (the packages that our code depends on to work), we can largely avoid the problem.</p>
+<section id="introducing-renv" class="level2">
+<h2 class="anchored" data-anchor-id="introducing-renv">Introducing renv</h2>
+<p><a href="https://rstudio.github.io/renv/">renv</a> (short for r environment) makes your R projects:</p>
+<ul>
+<li><strong>Isolated</strong>: Installing a new or updated package for one project won’t break your other projects, and vice versa. That’s because renv gives each project its own private package library.</li>
+<li><strong>Portable</strong>: Easily transport your projects from one computer to another, even across different platforms. renv makes it easy to install the packages your project depends on.</li>
+<li><strong>Reproducible</strong>: renv records the exact package versions you depend on, and ensures those exact versions are the ones that get installed wherever the project goes.</li>
+</ul>
+<p>renv can be installed onto your machine like any other package at any time during the lifecycle of your project. In the console:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"renv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>To use renv in your project, in the console:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">init</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This will set up a project library in a folder called <code>renv</code>, containing all the packages you’re currently using. The packages (and all the metadata needed to reinstall them) are recorded into a lockfile, <code>renv.lock</code>, and a <code>.Rprofile</code> file ensures that the library is used every time you open that project.</p>
+<p>As you work on your project, you will install and upgrade packages, either using <code>install.packages()</code> and <code>update.packages()</code> or <code>renv::install()</code> and <code>renv::update()</code>. After you’ve confirmed your code works as expected, use <code>renv::snapshot()</code> to record the packages and their sources in an updated lockfile.</p>
+<p>Later, if you need to share your code with someone else or run your code on new machine, your collaborator (or you) can call <code>renv::restore()</code> to install the specific package versions recorded in the lockfile.</p>
+<p>When we use renv commands we use the <code>::</code> notation so we don’t actually have to load the renv package, and we always enter <code>renv</code> commands in the console. We don’t preserve them in our script.</p>
+<p>The below graphic shows a diagram of the standard workflow:</p>
+<p><img src="images/renv.png" class="img-fluid"></p>
+</section>
+<section id="testing-it-out" class="level2">
+<h2 class="anchored" data-anchor-id="testing-it-out">Testing it out</h2>
+<p>Run <code>renv::init()</code> and you should see some activity in the console and you’ll see some new files in the Git pane.</p>
+<p>We now have a <code>renv.lock</code> file that has recorded the packages, and their versions, that are loaded in our script (or loaded in any scripts within our project).</p>
+<p>Lets install and load another package, as if we were going to use it in our script. In the console:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"ratdat"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>renv should tell you in the console that it is going to download the package from CRAN and install it within the project/renv folder. You’ll need to hit <code>Shift+Y</code> to confirm. It downloads the package, installs it first into your general R package library, then moves a copy into the project/renv folder. Now let’s load it in our script as if we were going to use it.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"ratdat"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Let’s pretend we used the package and were happy with our code. We can check the status of our project to see if renv has detected the new package.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">status</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>renv should tell you that <code>ratdat</code> is installed and used, but not recorded in the lock file. To fix this we take a snapshot to update the lock file.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">snapshot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>You should be prompted to allow the lock file to be updated with the package (Shift+Y to confirm).</p>
+<p>As we’re not actually using this package, we can remove it from our project by running:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">remove</span>(<span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>And deleting the <code>library("ratdat)</code> call above. Now we can update our lock file again:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">snapshot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>If someone clones the project from GitHub, and they have renv installed, they can <code>renv::restore()</code> the packages within the lockfile so that these package versions will be installed into the project package library on their machine too. This means they have the same packages, and the same versions, installed in their project library as the person who created the code.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
