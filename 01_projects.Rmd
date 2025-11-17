@@ -5,8 +5,27 @@ output: html_document
 
 ## Final set up
 
+To allow Git to work properly with RStudio, and to ensure your local Git install is linked with your GitHub account, we need to open Git bash (windows) or Terminal (macOS) and enter:
+```
+git config --global user.name "Jane Doe"
+git config --global user.email "jane@example.com"
+```
 
+substituting your name and **the email associated with your GitHub account**.
+The user.name you give does not have to be the same as your GitHub username. It can be your actual first and last name.
 
+## Generate a personal access token
+
+Log into your GitHub account. Select your profile picture in the top right corner and select 'settings'. Scroll to the bottom of the menu bar on the left and select '<> Developer settings'-> 'Personal access tokens' -> 'Tokens (classic)'.
+
+From here, select 'Generate new token' -> 'Generate new token (classic)'.
+
+Under 'Note' give your token a name so that you can remember what it is used for. For example `tom-work-laptop`. You can then set an expiration date.
+
+If you would like to use the same token forever, so that you don't have to return to GitHub to generate a new token, give it a somewhat generic name and set the expiration date to `No Expiration`.
+
+For the 'scopes', we recommend selecting 'repo', 'workflow' and 'user'.
+There are several reasons why you would want to create different personal access tokens, but scopes are one important reason. These define what type of access you need. 'Fine-grained tokens' take this even further by allowing you to specify different access types for different repositories.
 
 ## Create GitHub repository & RStudio project
 
@@ -37,3 +56,13 @@ There are many ways of setting up project folders, but the idea is to pick a con
 Download this dataset and put it into `data_raw`.
 
 Create a new R script (Ctrl+Shift+N), call it `analysis.R` and save it in `src`.
+
+## Commiting using Git
+
+Now that we've set up our project folder, it's a good time to make our first 'commit' to Git.
+
+Select the Git tab in RStudio and tick the 'staged' box for the file you wish to commit. Type a commit message detailing any changes you have made and select the 'Commit' button.
+
+You may now be presented with a pop-up asking you to connect to Github. Here you will need to paste in your github token.
+
+You can now 'push' your commit up to GitHub, so that the GitHub repository reflects the current state of the repository on your machine.
