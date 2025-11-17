@@ -29,6 +29,8 @@ Create a new script in RStudio (Ctrl+Shift+N) and save it in the `scripts` folde
 Load packages we need for the workshop.
 
 ```{r}
+#| message: false
+#| warning: false
 library(readr)
 library(dplyr)
 library(tidyr)
@@ -42,6 +44,7 @@ Let's take a common example of some data analysis and apply the above principles
 First, let's read in some data split into different files by month. Instead of naming each file, we can use `readr::read_csv()` to read them all in at once, bind them together into a single dataframe, and add a new column containing the filename of the data source. 
 
 ```{r}
+#| message: false
 files <- list.files(path = "data_raw", pattern = "\\.csv", full.names = TRUE)
 
 surveys <- read_csv(files, id = "source")
@@ -62,6 +65,8 @@ valid_species <-
 Rather than write out the same code 15 times, this is a good time to write our own function. If we encapsulate all the plotting steps in a function, we can then use {purrr} to apply the function over the species and create the plots.
 
 ```{r}
+#| message: false
+#| warning: false
 # Create an example of a plot
 ggplot(surveys, aes(x = weight, y = hindfoot_length, colour = sex)) +
   geom_point() +
@@ -69,6 +74,7 @@ ggplot(surveys, aes(x = weight, y = hindfoot_length, colour = sex)) +
 ```
 
 ```{r}
+#| warning: false
 plot_species <- function(data, x_var, y_var, colour, species) {
 
   filtered_data <- 
