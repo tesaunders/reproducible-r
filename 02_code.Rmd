@@ -87,7 +87,8 @@ plot_species <- function(data, x_var, y_var, colour, species) {
     filtered_data |> 
     ggplot(aes(x = .data[[x_var]], y = .data[[y_var]], colour = .data[[colour]])) +
     geom_point(alpha = 0.6) +
-    theme_minimal()
+    theme_minimal() +
+    ggtitle(plot_title)
   
   save_path <- paste0("figures/", species, "_", x_var, "_vs_", y_var, ".png")
   
