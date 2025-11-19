@@ -10,7 +10,7 @@ Welcome to the workshop repository for Reproducible & Collaborative Data Science
 
 # Getting Set Up
 
-Follow the instructions on the [set up]() page to install some software and create a GitHub account before the workshop.
+Follow the instructions on the [set up](setup.html) page to install some software and create a GitHub account before the workshop.
 
 # Objectives
 

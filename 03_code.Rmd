@@ -24,9 +24,7 @@ We can improve our scripts by writing code which is:
 - Use comments to explain why you did something the way you did 
 - Include a README with each project to provide important context and background
 
-Create a new script in RStudio (Ctrl+Shift+N) and save it in the `scripts` folder.
-
-Load packages we need for the workshop.
+Let's take a common example of some data analysis and apply the above principles when writing the code. First make sure our packages are loaded:
 
 ```{r}
 #| message: false
@@ -36,12 +34,9 @@ library(dplyr)
 library(tidyr)
 library(ggplot2)
 library(purrr)
-library(renv)
 ```
 
-Let's take a common example of some data analysis and apply the above principles when writing the code.
-
-First, let's read in some data split into different files by month. Instead of naming each file, we can use `readr::read_csv()` to read them all in at once, bind them together into a single dataframe, and add a new column containing the filename of the data source. 
+Let's read in some data split into different files by month. Instead of naming each file, we can use `readr::read_csv()` to read them all in at once, bind them together into a single dataframe, and add a new column containing the filename of the data source. 
 
 ```{r}
 #| message: false
