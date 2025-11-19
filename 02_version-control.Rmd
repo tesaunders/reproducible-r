@@ -16,8 +16,30 @@ Using a proper version control system solves these problems and makes collaborat
 
 Now that we've set up our project folder, it's a good time to make our first 'commit' to Git.
 
-Select the Git tab in RStudio and tick the 'staged' box for the file you wish to commit. Type a commit message detailing any changes you have made and select the 'Commit' button.
+Select the Git tab in RStudio and tick the 'staged' box for all the files (or select one file, press Ctrl+A, and then tick one of the selected files to tick all). Click Commit and type a commit message detailing the changes (let's go with "set up project" for now) and select the 'Commit' button.
 
 You may now be presented with a pop-up asking you to connect to Github. Here you will need to paste in your github token.
 
 You can now 'push' your commit up to GitHub, so that the GitHub repository reflects the current state of the repository on your machine.
+
+## Working with branches
+
+Git uses branches to make it easier to separate out new work and have more control over merging new work into the existing project. Let's create a new branch in the Git pane by clicking the button with the purple shapes next to 'main'. Let's call it `load-packages`, and leave everything as default. Usually you would do a bit more work in a new branch before merging it into the main branch, but for our purposes we'll just add some `library()` calls up the top of our script to load the packages we'll need.
+
+Open `analysis.R` and enter the following up the top:
+
+```{r}
+#| message: false
+#| warning: false
+library(readr)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(purrr)
+```
+
+Save the file and open the Git pane in RStudio. You should see the script file listed there.Lets stage, commit, and enter a commit message such as "add package loading", commit, and push.
+
+We've made this commit on the `load-packages` branch locally, and have now also pushed it up to the `load-packages` branch in our GitHub repository. Now we need to initiate what is called a 'pull request' in GitHub. This is a request to merge changes from a branch into the main branch within GitHub, and GitHub provides some useful tools when we do this.
+
+Head to github.com, sign in if you aren't already, click your profile icon top right and select 'repositories'. Your 'r-data-science' repo should be up the top as it has just had changes pushed to it. Select the repository and click the big green 'Pull request' button up the top. This opens the pull request dashboard, which has quite a bit of information on it. 

@@ -31,7 +31,9 @@ OR
 
 - Running the following command in the console:
 
-`install.packages(c("readr", "readxl", "dplyr", "ggplot2", "renv"))`
+```{r, eval=FALSE}
+install.packages(c("readr", "dplyr", "tidyr", "ggplot2", "purrr", "renv"))
+```
 
 # 4. Install Git
 
