@@ -72,7 +72,7 @@ You should be prompted to allow the lock file to be updated with the package (Sh
 As we're not actually using this package, we can remove it from our project by running:
 
 ```{r, eval=FALSE}
-renv::remove("")
+renv::remove("ratdat")
 ```
 
 And deleting the `library("ratdat)` call above. Now we can update our lock file again:
