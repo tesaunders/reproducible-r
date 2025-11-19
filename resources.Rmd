@@ -2,4 +2,15 @@
 title: "Resources"
 output: html_document
 ---
+[Online workshop lesson](https://tesaunders.github.io/reproducible-r/)
+
+[R for Data Science](https://r4ds.hadley.nz/)
+
+[Tidy data](https://uoa-eresearch.github.io/tidy-data/)
+
+[renv documentation](https://rstudio.github.io/renv/)
+
+
+
+
 

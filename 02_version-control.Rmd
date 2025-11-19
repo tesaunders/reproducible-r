@@ -1,0 +1,23 @@
+---
+title: "Version Control"
+output: html_document
+---
+
+When working on your own projects, or collaborating with others, you're likely to run into several problems:
+
+- Work may be lost or accidentally overwritten
+- Keeping track of which versions of a file are current becomes impossible as projects grow
+- It's difficult to see who did what and for what reason
+- Difficulties reverting to previous versions if something goes wrong
+
+Using a proper version control system solves these problems and makes collaborating on plain text documents like code much cleaner and simpler. We'll be using Git (installed locally on our machines) alongside GitHub (a cloud service) to demo a simple collaborative workflow.
+
+## Committing with Git
+
+Now that we've set up our project folder, it's a good time to make our first 'commit' to Git.
+
+Select the Git tab in RStudio and tick the 'staged' box for the file you wish to commit. Type a commit message detailing any changes you have made and select the 'Commit' button.
+
+You may now be presented with a pop-up asking you to connect to Github. Here you will need to paste in your github token.
+
+You can now 'push' your commit up to GitHub, so that the GitHub repository reflects the current state of the repository on your machine.

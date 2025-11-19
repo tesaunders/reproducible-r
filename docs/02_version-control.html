@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>RStudio Projects – Reproducible R</title>
+<title>Version Control – Reproducible R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -96,11 +96,11 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Set up</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./01_projects.html" aria-current="page"> 
+    <a class="nav-link" href="./01_projects.html"> 
 <span class="menu-text">1. Projects</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./02_version-control.html"> 
+    <a class="nav-link active" href="./02_version-control.html" aria-current="page"> 
 <span class="menu-text">2. Version control</span></a>
   </li>  
   <li class="nav-item">
@@ -136,7 +136,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">RStudio Projects</h1>
+<h1 class="title">Version Control</h1>
 </div>
 
 
@@ -153,46 +153,20 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="final-set-up" class="level2">
-<h2 class="anchored" data-anchor-id="final-set-up">Final set up</h2>
-<p>To allow Git to work properly with RStudio, and to ensure your local Git install is linked with your GitHub account, we need to open Git bash (windows) or Terminal (macOS) and enter:</p>
-<pre><code>git config --global user.name "Jane Doe"
-git config --global user.email "jane@example.com"</code></pre>
-<p>substituting your name and <strong>the email associated with your GitHub account</strong>. The user.name you give does not have to be the same as your GitHub username. It can be your actual first and last name.</p>
-</section>
-<section id="generate-a-personal-access-token" class="level2">
-<h2 class="anchored" data-anchor-id="generate-a-personal-access-token">Generate a personal access token</h2>
-<p>Log into your GitHub account. Select your profile picture in the top right corner and select ‘settings’. Scroll to the bottom of the menu bar on the left and select ‘&lt;&gt; Developer settings’-&gt; ‘Personal access tokens’ -&gt; ‘Tokens (classic)’.</p>
-<p>From here, select ‘Generate new token’ -&gt; ‘Generate new token (classic)’.</p>
-<p>Under ‘Note’ give your token a name so that you can remember what it is used for. For example <code>tom-work-laptop</code>. You can then set an expiration date.</p>
-<p>If you would like to use the same token forever, so that you don’t have to return to GitHub to generate a new token, give it a somewhat generic name and set the expiration date to <code>No Expiration</code>.</p>
-<p>For the ‘scopes’, we recommend selecting ‘repo’, ‘workflow’ and ‘user’. There are several reasons why you would want to create different personal access tokens, but scopes are one important reason. These define what type of access you need. ‘Fine-grained tokens’ take this even further by allowing you to specify different access types for different repositories.</p>
-</section>
-<section id="create-github-repository-rstudio-project" class="level2">
-<h2 class="anchored" data-anchor-id="create-github-repository-rstudio-project">Create GitHub repository &amp; RStudio project</h2>
-<p>We’re going to work in an RStudio project connected to a GitHub repository.</p>
-<p>First we create the repository in GitHub:</p>
-<ol type="1">
-<li>Go to github.com, sign in, then click the green ‘New’ button.</li>
-<li>Name it “r-data-science”, leave the rest as default, then click ‘create repository’.</li>
-<li>Copy the github.com address in the ‘Quick set up box’.</li>
-<li>Open RStudio and select File -&gt; New project -&gt; Version control -&gt; Git -&gt; and paste the address into the ‘Repository URL’ box.</li>
-</ol>
-<p>In the box called ‘Create project as subdirectory of:’ you need to select a location on your machine. It’s a good idea to create a folder called something like ‘projects’ in your user folder and select this every time, to group your repositories together in the same place on your machine(s). Let’s do that by clicking ‘Browse’, navigating to your user folder, and creating a new folder called ‘projects’ before selecting it and clicking ‘create project’.</p>
-<p>RStudio opens a new project called <code>r-data-science</code>. RStudio projects are essentially the .RProj file - this file tells RStudio that this folder is home to the project, and to use the folder as the ‘working directory’, or the place where R is looking when you ask it to load data or save an output.</p>
-</section>
-<section id="set-up-folders" class="level2">
-<h2 class="anchored" data-anchor-id="set-up-folders">Set up folders</h2>
-<p>Create the following folders from within RStudio:</p>
+<p>When working on your own projects, or collaborating with others, you’re likely to run into several problems:</p>
 <ul>
-<li>data_raw: holds the raw, untouched data.</li>
-<li>data: holds cleaned data.</li>
-<li>results: holds outputs like figures or summarised data.</li>
-<li>src: holds analysis script(s).</li>
+<li>Work may be lost or accidentally overwritten</li>
+<li>Keeping track of which versions of a file are current becomes impossible as projects grow</li>
+<li>It’s difficult to see who did what and for what reason</li>
+<li>Difficulties reverting to previous versions if something goes wrong</li>
 </ul>
-<p>There are many ways of setting up project folders, but the idea is to pick a convention and stick to it across different projects to stay organised and save time.</p>
-<p>Download this dataset and put it into <code>data_raw</code>.</p>
-<p>Create a new R script (Ctrl+Shift+N), call it <code>analysis.R</code> and save it in <code>src</code>.</p>
+<p>Using a proper version control system solves these problems and makes collaborating on plain text documents like code much cleaner and simpler. We’ll be using Git (installed locally on our machines) alongside GitHub (a cloud service) to demo a simple collaborative workflow.</p>
+<section id="committing-with-git" class="level2">
+<h2 class="anchored" data-anchor-id="committing-with-git">Committing with Git</h2>
+<p>Now that we’ve set up our project folder, it’s a good time to make our first ‘commit’ to Git.</p>
+<p>Select the Git tab in RStudio and tick the ‘staged’ box for the file you wish to commit. Type a commit message detailing any changes you have made and select the ‘Commit’ button.</p>
+<p>You may now be presented with a pop-up asking you to connect to Github. Here you will need to paste in your github token.</p>
+<p>You can now ‘push’ your commit up to GitHub, so that the GitHub repository reflects the current state of the repository on your machine.</p>
 
 
 </section>

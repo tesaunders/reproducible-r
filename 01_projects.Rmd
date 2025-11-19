@@ -56,13 +56,3 @@ There are many ways of setting up project folders, but the idea is to pick a con
 Download this dataset and put it into `data_raw`.
 
 Create a new R script (Ctrl+Shift+N), call it `analysis.R` and save it in `src`.
-
-## Commiting using Git
-
-Now that we've set up our project folder, it's a good time to make our first 'commit' to Git.
-
-Select the Git tab in RStudio and tick the 'staged' box for the file you wish to commit. Type a commit message detailing any changes you have made and select the 'Commit' button.
-
-You may now be presented with a pop-up asking you to connect to Github. Here you will need to paste in your github token.
-
-You can now 'push' your commit up to GitHub, so that the GitHub repository reflects the current state of the repository on your machine.

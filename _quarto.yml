@@ -12,10 +12,10 @@ website:
         href: setup.html
       - text: "1. Projects"
         href: 01_projects.html
-      - text: "2. Code"
-        href: 02_code.html
-      - text: "3. Version control"
-        href: 03_version-control.html
+      - text: "2. Version control"
+        href: 02_version-control.html
+      - text: "3. Code"
+        href: 03_code.html
       - text: "4. Dependencies"
         href: 04_dependencies.html
       - text: "5. Publishing"
