@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -164,9 +198,31 @@ ul.task-list li input[type="checkbox"] {
 <section id="committing-with-git" class="level2">
 <h2 class="anchored" data-anchor-id="committing-with-git">Committing with Git</h2>
 <p>Now that we’ve set up our project folder, it’s a good time to make our first ‘commit’ to Git.</p>
-<p>Select the Git tab in RStudio and tick the ‘staged’ box for the file you wish to commit. Type a commit message detailing any changes you have made and select the ‘Commit’ button.</p>
+<p>Select the Git tab in RStudio and tick the ‘staged’ box for all the files (or select one file, press Ctrl+A, and then tick one of the selected files to tick all). Click Commit and type a commit message detailing the changes (let’s go with “set up project” for now) and select the ‘Commit’ button.</p>
 <p>You may now be presented with a pop-up asking you to connect to Github. Here you will need to paste in your github token.</p>
 <p>You can now ‘push’ your commit up to GitHub, so that the GitHub repository reflects the current state of the repository on your machine.</p>
+</section>
+<section id="working-with-branches" class="level2">
+<h2 class="anchored" data-anchor-id="working-with-branches">Working with branches</h2>
+<p>Git uses branches to make it easier to separate out new work and have more control over merging new work into the existing project. Let’s create a new branch in the Git pane by clicking the button with the purple shapes next to ‘main’. Let’s call it <code>load-packages</code>, and leave everything as default. Usually you would do a bit more work in a new branch before merging it into the main branch, but for our purposes we’ll just add some <code>library()</code> calls up the top of our script to load the packages we’ll need.</p>
+<p>Open <code>analysis.R</code> and enter the following up the top:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(purrr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Save the file and open the Git pane in RStudio. You should see the script file listed there.Lets stage, commit, and enter a commit message such as “add package loading”, commit, and push.</p>
+<p>We’ve made this commit on the <code>load-packages</code> branch locally, and have now also pushed it up to the <code>load-packages</code> branch in our GitHub repository. Now we need to initiate what is called a ‘pull request’ in GitHub.</p>
+<p>A pull request is a proposal to merge a set of changes from one branch into another. In a pull request, collaborators can review and discuss the proposed set of changes before they integrate the changes into the main codebase. Pull requests display the differences, or diffs, between the content in the source branch and the content in the target branch.</p>
+<p>Head to github.com, sign in if you aren’t already, click your profile icon top right and select ‘repositories’. Your ‘r-data-science’ repo should be up the top as it has just had changes pushed to it. Select the repository and click the big green ‘Compare &amp; pull request’ button up the top. You should then see a page with an overview of the two branches and a green ‘Create pull request’ button. After clicking that, you’ll see a review page that shows a high-level overview of the changes between your branch (the compare branch) and the repository’s base branch. You can add a summary of the proposed changes, review the changes made by commits, add labels, milestones, and assignees, and <span class="citation" data-cites="mention">@mention</span> individual contributors or teams. After you’re happy with the proposed changes, you can merge the pull request.</p>
+<p>In this example, you should be able to go ahead and merge the pull request straight away. But when working with other people, it’s fairly common to run into <a href="https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/addressing-merge-conflicts/about-merge-conflicts">merge conflicts</a>. Merge conflicts occur when people make different changes to the same line of the same file, or when one person edits a file and another person deletes the same file. You must resolve all merge conflicts before you can merge a pull request on GitHub. If you have a merge conflict between the compare branch and base branch in your pull request, you can view a list of the files with conflicting changes above the Merge pull request button. The Merge pull request button is deactivated until you’ve resolved all conflicts between the compare branch and base branch.</p>
+</section>
+<section id="collaborating-with-git" class="level2">
+<h2 class="anchored" data-anchor-id="collaborating-with-git">Collaborating with Git</h2>
+<p>You can <a href="https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/repository-access-and-collaboration/inviting-collaborators-to-a-personal-repository?versionId=free-pro-team%40latest&amp;productId=repositories">invite collaborators</a> to give them access to your repo. This allows other people to pull from and push to the repo, and perform a variety of <a href="https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/repository-access-and-collaboration/permission-levels-for-a-personal-account-repository#collaborator-access-for-a-repository-owned-by-a-personal-account">other tasks</a>.</p>
+<p>Version control with Git and GitHub is a complex topic and not tsomething we can spend too much time on here, so please see this online <a href="https://uoa-eresearch.github.io/git-novice/">introductory Git lesson</a> if you’d like to learn more.</p>
 
 
 </section>
