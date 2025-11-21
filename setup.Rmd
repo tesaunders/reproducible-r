@@ -3,7 +3,7 @@ title: "Set Up"
 output: html_document
 ---
 
-# 1. Install R (or update)
+# 1. Install or update R
 
 If using a device managed by your organisation, install R from your organisational software repository or contact your IT department for help.
 
@@ -13,7 +13,7 @@ To download and install R on a personal machine:
 - [Mac](https://cran.r-project.org/bin/macosx/):
 - [Linux](https://cran.r-project.org/bin/linux/)
 
-# 2. Install RStudio (or update)
+# 2. Install or update RStudio
 
 If using a device managed by your organisation, install RStudio from your organisational software repository or contact your IT department for help.
 
@@ -25,7 +25,7 @@ To download and install RStudio on a personal machine (requires administrator pr
 
 Open RStudio and install the following R packages by:
 
-- Selecting Tools > Install Packages > and entering `readr, readxl, dplyr, ggplot2, renv` and select 'Install'.
+- Selecting Tools > Install Packages > and entering `readr, dplyr, tidyr, ggplot2, purrr, renv` and select 'Install'.
 
 OR
 

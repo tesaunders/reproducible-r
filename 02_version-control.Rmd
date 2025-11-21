@@ -42,6 +42,8 @@ Save the file and open the Git pane in RStudio. You should see the script file l
 
 We've made this commit on the `load-packages` branch locally, and have now also pushed it up to the `load-packages` branch in our GitHub repository. Now we need to initiate what is called a 'pull request' in GitHub. 
 
+## Merging with pull requests
+
 A pull request is a proposal to merge a set of changes from one branch into another. In a pull request, collaborators can review and discuss the proposed set of changes before they integrate the changes into the main codebase. Pull requests display the differences, or diffs, between the content in the source branch and the content in the target branch.
 
 Head to github.com, sign in if you aren't already, click your profile icon top right and select 'repositories'. Your 'r-data-science' repo should be up the top as it has just had changes pushed to it. Select the repository and click the big green 'Compare & pull request' button up the top. You should then see a page with an overview of the two branches and a green 'Create pull request' button. After clicking that, you'll see a review page that shows a high-level overview of the changes between your branch (the compare branch) and the repository's base branch. You can add a summary of the proposed changes, review the changes made by commits, add labels, milestones, and assignees, and @mention individual contributors or teams. After you're happy with the proposed changes, you can merge the pull request. 

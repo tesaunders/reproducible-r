@@ -3,7 +3,7 @@ title: "Managing Dependencies"
 output: html_document
 ---
 
-One of the benefits of using R to analyse data is gaining access to the incredible ecosystem of packages that have been developed to make it easier to perform all kinds of different analyses. Packages are often updated to fix bugs, add new functionality, or change existing functionality. Sometimes this means code breaks - something that used to work with a previous version of a package no longer works, so the code stops running. This can be frustrating and time consuming to fix. Fortunately, by smartly managing dependencies (the packages that our code depends on to work), we can largely avoid the problem.
+One of the benefits of using R to analyse data is gaining access to the incredible ecosystem of packages that have been developed to make it easier to perform all kinds of different analyses. Packages are often updated to fix bugs, add new functionality, or change existing functionality. Sometimes this means code breaks. Something that used to work with a previous version of a package no longer works, so the code stops running. This can be frustrating and time consuming to fix. Fortunately, by smartly managing dependencies (the packages that our code depends on to work), we can largely avoid the problem.
 
 ## Introducing renv
 

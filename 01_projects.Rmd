@@ -46,13 +46,13 @@ RStudio opens a new project called `r-data-science`. RStudio projects are essent
 
 Create the following folders from within RStudio:
 
-- data_raw: holds the raw, untouched data.
-- data: holds cleaned data.
-- results: holds outputs like figures or summarised data.
-- src: holds analysis script(s).
+- `data_raw`: holds the raw, untouched data.
+- `data`: holds cleaned data.
+- `results`: holds outputs like figures or summarised data.
+- `src`: holds analysis script(s).
 
 There are many ways of setting up project folders, but the idea is to pick a convention and stick to it across different projects to stay organised and save time.
 
 Download this dataset and put it into `data_raw`.
 
-Create a new R script (Ctrl+Shift+N), call it `analysis.R` and save it in `src`.
+Create a new R script (Ctrl+Shift+N), call it `analysis.R` and save it in the `src` folder.
