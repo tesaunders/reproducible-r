@@ -2,15 +2,11 @@
 title: "Resources"
 output: html_document
 ---
-[Online workshop lesson](https://tesaunders.github.io/reproducible-r/)
+See the [online workshop notes](https://tesaunders.github.io/reproducible-r/) to revisit the lesson in your own time.
 
-[R for Data Science](https://r4ds.hadley.nz/)
+[R for Data Science](https://r4ds.hadley.nz/) is highly recommended as a general purpose introduction to R, and particularly the Tidyverse ecosystem of packages. 
 
-[Tidy data](https://uoa-eresearch.github.io/tidy-data/)
+[Tidy data](https://uoa-eresearch.github.io/tidy-data/) expands on some of the principles we talked about around keeping files and analyses organised.
 
-[renv documentation](https://rstudio.github.io/renv/)
-
-
-
-
+See the [renv documentation](https://rstudio.github.io/renv/) for an overview of how to use renv with your projects.
 

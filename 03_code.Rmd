@@ -36,7 +36,7 @@ library(ggplot2)
 library(purrr)
 ```
 
-Let's read in some data split into different files by month. Instead of naming each file, we can use `readr::read_csv()` to read them all in at once, bind them together into a single dataframe, and add a new column containing the filename of the data source. 
+Let's read in a dataset split into separate files. Instead of reading in each file separately, we can use `readr::read_csv()` to read them all in at once, bind them together into a single dataframe, and add a new column containing the filename of the data source. The dataset we're working with contains measurements taken from mammals captured in the Chihuahuan desert. It is split into 4 separate `.csv` files based on time periods the measurements were recorded within. 
 
 ```{r}
 #| message: false
@@ -44,8 +44,6 @@ files <- list.files(path = "data_raw", pattern = "\\.csv", full.names = TRUE)
 
 surveys <- read_csv(files, id = "source")
 ```
-
-This dataset comprises measurements taken from mammals captured in the Chihuahuan desert. 
 
 Let's say we wanted to create a separate scatterplot for each species showing hindfoot length vs weight. Even if we're only interested in species codes with at least 100 valid observations, that's still 11 plots. 
 ```{r}

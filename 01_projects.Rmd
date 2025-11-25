@@ -10,7 +10,6 @@ To allow Git to work properly with RStudio, and to ensure your local Git install
 git config --global user.name "Jane Doe"
 git config --global user.email "jane@example.com"
 ```
-
 substituting your name and **the email associated with your GitHub account**.
 The user.name you give does not have to be the same as your GitHub username. It can be your actual first and last name.
 
@@ -48,11 +47,11 @@ Create the following folders from within RStudio:
 
 - `data_raw`: holds the raw, untouched data.
 - `data`: holds cleaned data.
-- `results`: holds outputs like figures or summarised data.
+- `figures`: holds figures and plots.
 - `src`: holds analysis script(s).
 
 There are many ways of setting up project folders, but the idea is to pick a convention and stick to it across different projects to stay organised and save time.
 
-Download this dataset and put it into `data_raw`.
+Download [this zipped dataset](data_raw/surveys_raw.zip), move it into `data_raw`, and unzip it.
 
 Create a new R script (Ctrl+Shift+N), call it `analysis.R` and save it in the `src` folder.

@@ -49,7 +49,7 @@ Lets install and load another package, as if we were going to use it in our scri
 install.packages("ratdat")
 ```
 
-renv should tell you in the console that it is going to download the package from CRAN and install it within the project/renv folder. You'll need to hit `Shift+Y` to confirm. It downloads the package, installs it first into your general R package library, then moves a copy into the project/renv folder. Now let's load it in our script as if we were going to use it.
+renv should tell you in the console that it is going to download the package from CRAN and install it within the project/renv folder. You'll need to hit `Shift+Y` to confirm. It downloads the package, stores it within a central package cache, and links it into your project package library. This means if you want to link that same package in a different project renv will link it from the central cache without having to download it again. Now let's load the `ratdat` package in our script as if we were going to use it.
 
 ```{r}
 library("ratdat")
@@ -75,7 +75,7 @@ As we're not actually using this package, we can remove it from our project by r
 renv::remove("ratdat")
 ```
 
-And deleting the `library("ratdat)` call above. Now we can update our lock file again:
+And deleting the `library("ratdat")` call above. Now we can update our lock file again:
 
 ```{r, eval=FALSE}
 renv::snapshot()
