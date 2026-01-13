@@ -40,10 +40,34 @@ Let's read in a dataset split into separate files. Instead of reading in each fi
 
 ```{r}
 #| message: false
-files <- list.files(path = "data_raw", pattern = "\\.csv", full.names = TRUE)
+
+# Combine data from different collection periods
+
+files <- list.files(path = "data_raw", 
+                    pattern = "\\.csv", 
+                    full.names = TRUE)
 
 surveys <- read_csv(files, id = "source")
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 Let's say we wanted to create a separate scatterplot for each species showing hindfoot length vs weight. Even if we're only interested in species codes with at least 100 valid observations, that's still 11 plots. 
 ```{r}
@@ -61,38 +85,45 @@ Rather than write out the same code 15 times, this is a good time to write our o
 #| message: false
 #| warning: false
 # Create an example of a plot
+
 ggplot(surveys, aes(x = weight, y = hindfoot_length, colour = sex)) +
   geom_point() +
   theme_minimal()
 ```
 
 ```{r}
-#| warning: false
 plot_species <- function(data, x_var, y_var, colour, species) {
+  
+  # Convert variable names to strings for plot titles
+  x_name <- as_label(enquo(x_var))
+  y_name <- as_label(enquo(y_var))
+  
+  # Check the species ID exists in the data
+  if (!(species %in% data$species_id)) {
+    stop(paste0("Error: Species ID '", species, "' not found in the dataset."))
+  }
 
-  filtered_data <- 
-    data |> 
-    filter(species_id == {{ species }})
-  
-  plot_title <- paste0(y_var, " vs. ", x_var, " for Species ID: ", species)
-  
+  # Embrace variables to look in the dataframe for that column
   plot <- 
-    filtered_data |> 
-    ggplot(aes(x = .data[[x_var]], y = .data[[y_var]], colour = .data[[colour]])) +
+    data |> 
+    filter(species_id == .env$species) |> # Look for species in the function's environment
+    ggplot(aes(x = {{ x_var }}, y = {{ y_var }}, colour = {{ colour }})) +
     geom_point(alpha = 0.6) +
     theme_minimal() +
-    ggtitle(plot_title)
+    labs(title = paste(y_name, "vs.", x_name, "for Species ID:", species))
   
-  save_path <- paste0("figures/", species, "_", x_var, "_vs_", y_var, ".png")
+  save_path <- paste0("figures/", species, "_", x_name, "_vs_", y_name, ".png")
   
-  ggsave(save_path, plot = plot, width = 10, height = 6, units = "in")
+  ggsave(save_path, plot = plot, width = 10, height = 6)
 }
+
+# purrr::walk iterates over valid_species to produce the plots
 
 walk(valid_species, ~ plot_species(
   data = surveys,
-  x_var = "weight",
-  y_var = "hindfoot_length",
-  colour = "sex",
+  x_var = weight,            
+  y_var = hindfoot_length,   
+  colour = sex,              
   species = .x 
 ))
 ```
