@@ -24,7 +24,7 @@ We can improve our scripts by writing code which is:
 - Use comments to explain why you did something the way you did 
 - Include a README with each project to provide important context and background
 
-Let's take a common example of some data analysis and apply the above principles when writing the code. First make sure our packages are loaded:
+Let's take a common example of some data analysis and apply the above principles when writing the code. First load the packages we need:
 
 ```{r}
 #| message: false
@@ -34,6 +34,7 @@ library(dplyr)
 library(tidyr)
 library(ggplot2)
 library(purrr)
+library(car)
 ```
 
 Let's read in a dataset split into separate files. Instead of reading in each file separately, we can use `readr::read_csv()` to read them all in at once, bind them together into a single dataframe, and add a new column containing the filename of the data source. The dataset we're working with contains measurements taken from mammals captured in the Chihuahuan desert. It is split into 4 separate `.csv` files based on time periods the measurements were recorded within. 
@@ -53,6 +54,8 @@ surveys <- read_csv(files, id = "source")
 Let's take a quick look at the mean `hindfoot_length` and `weight` for each species.
 
 ```{r}
+#| message: false
+#| warning: false
 surveys |> 
   group_by(species_id) |> 
   summarise(across(c(hindfoot_length, weight), mean, na.rm = TRUE)) |> 
@@ -62,9 +65,11 @@ surveys |>
 To understand how `hindfoot_length` varies based on the plot type the animal was captured in let's use a boxplot.
 
 ```{r}
+#| warning: false
 ggplot(data = surveys, aes(x = plot_type, y = hindfoot_length)) +
   geom_boxplot() +
-  theme_bw()
+  theme_bw() +
+  coord_flip() # Rotate the plot so the labels are easily readable
 ```
 
 Let's say we wanted to create a separate scatterplot for each species showing hindfoot length vs weight. Even if we're only interested in species codes with at least 100 valid observations, that's still 11 plots.
@@ -93,6 +98,7 @@ ggplot(surveys, aes(x = weight, y = hindfoot_length)) +
 Rather than write out the same code 15 times, this is a good time to write our own function. If we encapsulate all the plotting steps in a function, we can then use {purrr} to apply the function over the species and create the plots.
 
 ```{r}
+#| warning: false
 plot_species <- function(data, x_var, y_var, species) {
   
   # Check that the data contains the species or provide a useful error message
@@ -124,37 +130,36 @@ walk(valid_species, ~ plot_species(
 ))
 ```
 
-We have done some preliminary inspecting of our data. Now lets go one step further and liken this to a more realistic workflow. Perhaps we want to look more closely at the plot type. 
-
 In 1977, 24 experimental plots were established and each plot was manipulated in one of five ways. We can look at these plot types using `dplyr::distinct()` 
 
 ```{r}
 surveys |> distinct(plot_type)
 ```
 
-Given that these plot types concern excluding other rodents, one question we may want the answer to is how this has impacted on the development of the mammals we are sampling, specifically their hindfoot_length.
+One question we may have is how this impacts the mammals captured in these areas. 
 
-As with any questions like this, a good place to start would be to visualise the data.Given that we have a categorical independent variable (plot_type), lets use a boxplot.
+Let's look at plot_type to see how hindfoot_length differs.
 
 ```{r}
+#| warning: false
 ggplot(surveys, aes(x = plot_type, y = hindfoot_length)) +
   geom_boxplot() +
   theme_minimal() +
-  coord_flip() # Using coord flip to rotate the plot so the labels are easily readable
+  coord_flip() 
 ```
-It looks like there may be a relationship between weight and plot type. We can see that, for example, there looks to be quite a difference in weight between the control and the long-term krat exclosure plot-types.
+There may be a relationship between hindfoot_length and plot type. 
 
-Because we have a continuous dependent variable (weight) and an categorical independent variable (plot type), with multiple levels, ANOVA would be an appropriate statistical test with some post-hoc comparisons to test the individual differences in weight across each plot type.
+We have a continuous dependent variable (hindfoot_length) and a categorical independent variable (plot_type), with multiple levels. An ANOVA would be an appropriate statistical test here, complemented by some post-hoc comparisons to test the individual differences in hindfoot_length across each plot_type.
 
-Before we do that though, there are a number of assumptions we must check:
+First we have to check assumptions:
 
 1. Normality
 
-As with any general linear model, we must check for normality. Here, we are looking at normality of residuals. In truth, because our sample size per group is so high, I usually wouldn't bother inspecting this, but I will here.
+As with any general linear model we need to check that the data conforms to a normal distribution. 
 
-There are two main ways of testing this assumption, graphical and statistical. We recommend the graphical methods, which include plotting the residuals in a histogram or QQ-plot. The statistical methods include normality tests such as Shapiro-Wilk which can be rather conservative, especially given large sample sizes. 
+We can do this graphically or statistically. To do it graphically we plot the residuals in a histogram or QQ-plot, and to do it statistically we would use a Shapiro-Wilk test, but these tests can be quite conservativegiven large sample sizes. 
 
-Here we will plot the residuals using a histogram and QQ-plot.
+Here we'll plot the residuals using a histogram and QQ-plot.
 
 ```{r}
 # Run the ANOVA to get our residuals
@@ -170,27 +175,28 @@ hist(residuals_anova$residuals)
 qqPlot(residuals_anova$residuals, id = FALSE)
 ```
 
-We can see that the residuals do not exactly follow a normal distribution. In this case, I would be ok with this as combined with our large sample size our ANOVA will be fairly robust to any violation of normality.
+The residuals do not follow a normal distribution, but in this case, combined with our large sample size our ANOVA will be fairly robust to any violation of normality.
 
 2. Homogeneity - Equality of Variances
 
-Our second assumption to check is whether the variance in hindfoot length is roughly equal across all plot types. We can do this, again, using statistical methods, graphical methods, or both. Just like normality, I will opt for graphical methods. In particular, I will once again use a boxplot.
+We also need to check whether the variance in hindfoot_length is roughly equal across all plot types. We can do this, again, using statistical methods, graphical methods, or both. Let's use a boxplot.
 
 ```{r}
+#| warning: false
 ggplot(surveys, aes(x = plot_type, y = hindfoot_length)) +
   geom_boxplot(outliers = FALSE) +
   theme_minimal() +
   coord_flip() # Using coord flip to rotate the plot so the labels are easily readable
 ```
-It seems quite clear that this assumption has been violated. Having removed the outliers, we can see that the whiskers of the Control and Long-term Krat Exclosure plots are much smaller than the other three plot types. If the groups had similar sample sizes I would not be too worried, but they do not.
+This assumption has been violated. Having removed the outliers, we can see that the whiskers of the Control and Long-term Krat Exclosure plots are much smaller than the other three plot types.
 
 We have two options here. The first would be to use a non-parametric alternative, such as the Kruskall-Wallis H test. The second would be to use a parametric alternative that is robust to violations of this assumption. The most commonly used is the Welch test.
 
 3. Independence of observations
 
-This assumption states that the data has been collected from random sample and are not related. This is verified through good experimental design. We can state that we have satisfied this assumption.
+This assumption states that the data has been collected from random samples and are not related. This is verified through good experimental design. We can state that we have satisfied this assumption.
 
-### Performing the ANOVA
+Performing the ANOVA
 
 ```{r}
 oneway.test(hindfoot_length ~ plot_type, data = surveys, var.equal = FALSE)
@@ -202,5 +208,3 @@ Now lets explore this effect further by conducting some post-hoc comparisons. We
 pairwise.t.test(surveys$hindfoot_length, surveys$plot_type,
                 p.adjust.method = "bonferroni", pool.sd = FALSE)
 ```
-
-Done, but i don't actually like this too much. 
