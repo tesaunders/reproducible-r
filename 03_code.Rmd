@@ -101,31 +101,37 @@ Rather than write out the same code 15 times, this is a good time to write our o
 #| warning: false
 plot_species <- function(data, x_var, y_var, species) {
   
-  # Check that the data contains the species or provide a useful error message
-  if (!(species %in% data$species_id)) {
-    stop(paste0("Error: Species ID '", species, "' not found in the dataset."))
+  # Useful to ensure any directories exist, or if not, create them
+  if (!dir.exists("figures")) {
+    dir.create("figures")
   }
   
-  # Use .data[[]] so we can pass strings as arguments to use in plot titles and save paths
+  # Capture the variable names as strings for the filenames
+  x_name <- as_label(enquo(x_var))
+  y_name <- as_label(enquo(y_var))
+  
+  # Create the plot
   plots <- 
     data |> 
-    filter(species_id == .env$species) |> 
-    ggplot(aes(x = .data[[x_var]], 
-               y = .data[[y_var]])) +
+    filter(species_id == {{ species }}) |>
+    ggplot(aes(x = {{ x_var }}, 
+               y = {{ y_var }})) +
     geom_point(alpha = 0.2) +
-    theme_minimal() +
-    ggtitle(paste0(y_var, " vs. ", x_var, " for Species ID: ", species))
+    labs(title = paste("Species:", species)) +
+    theme_minimal()
   
-  ggsave(paste0("figures/", species, "_", x_var, "_vs_", y_var, ".png"), 
-         plot = plots, width = 10, height = 6)
+  # Construct the filename and save
+  file_path <- paste0("figures/", species, "_", x_name, "_", y_name, ".png")
+  
+  ggsave(filename = file_path, plot = plots, width = 6, height = 4)
 }
 
-# purrr::walk iterates over valid_species to create and save the plots
+# purrr::walk iterates over a list or vector with a function
 
 walk(valid_species, ~ plot_species(
   data = surveys,
-  x_var = "weight",            
-  y_var = "hindfoot_length",   
+  x_var = weight,            
+  y_var = hindfoot_length,   
   species = .x 
 ))
 ```
