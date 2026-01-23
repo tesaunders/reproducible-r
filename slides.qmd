@@ -1,17 +1,29 @@
 ---
-title: "Reproducible and collaborative data science in R"
-subtitle: "Dr Tom Saunders & Dr Toby Johnson"
+title: "Reproducible & Collaborative Data Science In R"
+subtitle: "Dr Tom Saunders & Dr Toby Johnson<br>Centre for eResearch"
 format:
   revealjs: 
     slide-number: true
-    logo: images/uoa.png
     footer: "Tuesday 19 February, 2025"
     embed-resources: true
+title-slide-attributes:
+  data-background-image: "images/uoa.png"
+  data-background-size: 15% 
+  data-background-position: "10% 10%" 
 ---
+
+## Hi!
+
+- Today we're getting hands-on to make R code better.
+- Don't worry if you aren't able to follow every step.
+- Put a pink post-it on your screen to indicate you're stuck.
+- Raise hand for a question at any time.
 
 ## Objective
 
 Unlock the full potential of your scripts by making your code reproducible, shareable, and citable.
+
+Workshop repository:
 
 https://github.com/tesaunders/reproducible-r
 
@@ -23,7 +35,7 @@ Applying some software development princicples enables you to:
 
 - Write readable, reproducible, maintainable code
 - Save time and frustration when using and maintaining code 
-- Reduce duplication for you and your collaborators 
+- Collaborate more efficiently
 - Make your research reusable, transparent, and rigorous 
 
 ## Problem: Folders are a mess
@@ -42,7 +54,7 @@ Applying some software development princicples enables you to:
 
 Many beginner programmers:
 
-- Do not document their code which makes it harder to understand
+- Do not document their code
 - Rely on assigning objects instead of piping
 - Are not aware of how to write their own functions
 - Get stuck with how and why to iterate
@@ -51,18 +63,19 @@ Many beginner programmers:
 
 1. Use comments to explain why you did something a particular way 
 2. Use sections and subsections to organise and navigate longer scripts 
-3. Use a consistent style (linting with {styler}) 
+3. Use a consistent style (linting with {styler} or Air) 
 4. Write functions and iterate to do complex things at scale
 
 ## Problem: Difficult to collaborate on code/analyses
 
 - Emailing back and forth is inefficient
+- Working by yourself is lonely :(
 
 ## Solution: Use a version control system
 
 - Git - software installed on your machine which tracks versions of files
 - GitHub - cloud service which allows you to share/collaborate on projects
-- All changes are kept, revertible
+- All changes are kept, revertible, nothing is lost
 - Features like issues (to do lists), code review, automatic checks
 
 ## Problem: Code doesn't run after package updates
@@ -73,17 +86,17 @@ Many beginner programmers:
 
 renv takes a snapshot of currently used packages within a project.
 
-- A lockfile containing the data can then be added to GitHub.
-- When someone clones the projects they can use renv to install the same package versions.
+- Creates a 'lockfile' containing the packages and versions you've used.
+- Collaborator/reuser can get the same environment with one command.
 - This makes it far more likley the code will continue to work.
 
 ## Problem: Many researchers don't get credit for their code
 
 Lots of code is:
 
-- not recognised/rewarded as an output of research
-- not easily findble and reusable by others
-- not attached to results to enable reproducibility
+- not recognised/rewarded as an output of research.
+- not easily findble and reusable by others.
+- not attached to data/results to enable reproducibility.
 
 ## Solution: Publish your code
 
@@ -92,6 +105,6 @@ Two good options:
 1. GitHub repositories can be connected to Zenodo to get a DOI, OR
 2. Publish the code or a link to the GitHub repo with FigShare or Zenodo
 
-- Code is more easily associated with other publications
-- Code is citable, and citations can be tracked
-- DOIs are persistent records that will always resolve to the right place
+- Code is more easily associated with other publications.
+- Code is citable, and citations can be tracked.
+- DOIs are persistent records that will always resolve to the right place.
