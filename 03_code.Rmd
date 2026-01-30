@@ -15,7 +15,7 @@ We can improve our scripts by writing code which is:
 2. Reusable
 
 - Write functions to perform sets of operations
-- Use iteration (for loops, or `map()`) 
+- Use iteration (for loops, or `{purrr}`) 
 - Consider creating packages for data and code used in multiple places
 - Break up long scripts into separate files (cleaning, manipulating, plotting)
 
@@ -72,7 +72,7 @@ ggplot(data = surveys, aes(x = plot_type, y = hindfoot_length)) +
   coord_flip() # Rotate the plot so the labels are easily readable
 ```
 
-Let's say we wanted to create a separate scatterplot for each species showing hindfoot length vs weight. Even if we're only interested in species codes with at least 100 valid observations, that's still 11 plots.
+Let's say we wanted to create a separate scatterplot for each species showing hindfoot length vs weight. Even if we're only interested in species codes with at least 100 valid observations, that's still quite a few plots.
 
 ```{r}
 valid_species <-
@@ -95,18 +95,18 @@ ggplot(surveys, aes(x = weight, y = hindfoot_length)) +
   theme_minimal()
 ```
 
-Rather than write out the same code 15 times, this is a good time to write our own function. If we encapsulate all the plotting steps in a function, we can then use {purrr} to apply the function over the species and create the plots.
+Rather than write out the same code many times, this is a good time to write our own function. If we encapsulate all the plotting steps in a function, we can then use {purrr} to apply the function over the species and create the plots.
 
 ```{r}
 #| warning: false
 plot_species <- function(data, x_var, y_var, species) {
   
-  # Useful to ensure any directories exist, or if not, create them
+  # Ensure any directories exist, or if not, create them
   if (!dir.exists("figures")) {
     dir.create("figures")
   }
   
-  # Capture the variable names as strings for the filenames
+  # Capture the variable names as strings so we can use them in the filenames
   x_name <- as_label(enquo(x_var))
   y_name <- as_label(enquo(y_var))
   

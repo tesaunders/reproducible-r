@@ -203,7 +203,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ol>
 <ul>
 <li>Write functions to perform sets of operations</li>
-<li>Use iteration (for loops, or <code>map()</code>)</li>
+<li>Use iteration (for loops, or <code>{purrr}</code>)</li>
 <li>Consider creating packages for data and code used in multiple places</li>
 <li>Break up long scripts into separate files (cleaning, manipulating, plotting)</li>
 </ul>
@@ -276,7 +276,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>Let’s say we wanted to create a separate scatterplot for each species showing hindfoot length vs weight. Even if we’re only interested in species codes with at least 100 valid observations, that’s still 11 plots.</p>
+<p>Let’s say we wanted to create a separate scatterplot for each species showing hindfoot length vs weight. Even if we’re only interested in species codes with at least 100 valid observations, that’s still quite a few plots.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>valid_species <span class="ot">&lt;-</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  surveys <span class="sc">|&gt;</span></span>
@@ -300,16 +300,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>Rather than write out the same code 15 times, this is a good time to write our own function. If we encapsulate all the plotting steps in a function, we can then use {purrr} to apply the function over the species and create the plots.</p>
+<p>Rather than write out the same code many times, this is a good time to write our own function. If we encapsulate all the plotting steps in a function, we can then use {purrr} to apply the function over the species and create the plots.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>plot_species <span class="ot">&lt;-</span> <span class="cf">function</span>(data, x_var, y_var, species) {</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Useful to ensure any directories exist, or if not, create them</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Ensure any directories exist, or if not, create them</span></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">dir.exists</span>(<span class="st">"figures"</span>)) {</span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">dir.create</span>(<span class="st">"figures"</span>)</span>
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  }</span>
 <span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Capture the variable names as strings for the filenames</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Capture the variable names as strings so we can use them in the filenames</span></span>
 <span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  x_name <span class="ot">&lt;-</span> <span class="fu">as_label</span>(<span class="fu">enquo</span>(x_var))</span>
 <span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  y_name <span class="ot">&lt;-</span> <span class="fu">as_label</span>(<span class="fu">enquo</span>(y_var))</span>
 <span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  </span>
