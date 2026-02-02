@@ -3,6 +3,7 @@ title: "Reproducible & Collaborative Data Science In R"
 subtitle: "Dr Tom Saunders & Dr Toby Johnson<br>Centre for eResearch"
 format:
   revealjs: 
+    theme: [default, dark]
     slide-number: true
     footer: "Tuesday 19 February, 2025"
     embed-resources: true
@@ -16,7 +17,7 @@ title-slide-attributes:
 
 - Today we're getting hands-on to make R code better.
 - Don't worry if you aren't able to follow every step.
-- Put a pink post-it on your screen to indicate you're stuck.
+- Put a yellow post-it on your screen to indicate you're stuck.
 - Raise hand for a question at any time.
 
 ## Objective
