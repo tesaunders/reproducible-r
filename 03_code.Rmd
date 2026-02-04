@@ -51,7 +51,7 @@ files <- list.files(path = "data_raw",
 surveys <- read_csv(files, id = "source")
 ```
 
-Let's take a quick look at the mean `hindfoot_length` and `weight` for each species.
+Let's take a quick look at the mean `hindfoot_length` and `weight` for each species. We may want to save this summary table to use later.
 
 ```{r}
 #| message: false
@@ -59,7 +59,8 @@ Let's take a quick look at the mean `hindfoot_length` and `weight` for each spec
 surveys |> 
   group_by(species_id) |> 
   summarise(across(c(hindfoot_length, weight), mean, na.rm = TRUE)) |> 
-  na.omit()
+  na.omit() |> 
+  write_csv("data/weight-foot-by-species.csv")
 ```
 
 To understand how `hindfoot_length` varies based on the plot type the animal was captured in let's use a boxplot.
@@ -101,14 +102,10 @@ Rather than write out the same code many times, this is a good time to write our
 #| warning: false
 plot_species <- function(data, x_var, y_var, species) {
   
-  # Ensure any directories exist, or if not, create them
+  # Ensure the figure directory exist, or if not, create it
   if (!dir.exists("figures")) {
     dir.create("figures")
   }
-  
-  # Capture the variable names as strings so we can use them in the filenames
-  x_name <- as_label(enquo(x_var))
-  y_name <- as_label(enquo(y_var))
   
   # Create the plot
   plots <- 
@@ -121,7 +118,7 @@ plot_species <- function(data, x_var, y_var, species) {
     theme_minimal()
   
   # Construct the filename and save
-  file_path <- paste0("figures/", species, "_", x_name, "_", y_name, ".png")
+  file_path <- paste0("figures/", species, "_plot.png")
   
   ggsave(filename = file_path, plot = plots, width = 6, height = 4)
 }
