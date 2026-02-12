@@ -35,6 +35,7 @@ library(tidyr)
 library(ggplot2)
 library(purrr)
 library(car)
+library(rstatix)
 ```
 
 Let's read in a dataset split into separate files. Instead of reading in each file separately, we can use `readr::read_csv()` to read them all in at once, bind them together into a single dataframe, and add a new column containing the filename of the data source. The dataset we're working with contains measurements taken from mammals captured in the Chihuahuan desert. It is split into 4 separate `.csv` files based on time periods the measurements were recorded within. 
@@ -204,10 +205,16 @@ Performing the ANOVA
 ```{r}
 oneway.test(hindfoot_length ~ plot_type, data = surveys, var.equal = FALSE)
 ```
+
 According to this ANOVA there is a significant effect of plot type on hindfoot length. 
-Now lets explore this effect further by conducting some post-hoc comparisons. We will use a simple bonferroni correction. This can be used to determine our new alpha level, by dividing our original alpha level (.05) by the number of comparisons we will be making (10)
+Now lets explore this effect further by conducting some post-hoc comparisons. We will use a simple bonferroni correction. This can be used to determine our new alpha level, by dividing our original alpha level (.05) by the number of comparisons we will be making (10).
+
 
 ```{r}
-pairwise.t.test(surveys$hindfoot_length, surveys$plot_type,
-                p.adjust.method = "bonferroni", pool.sd = FALSE)
+  pairwise_t_test(
+    surveys, hindfoot_length ~ plot_type, pool.sd = FALSE,
+    p.adjust.method = "bonferroni"
+    )
 ```
+
+We can see from our pairwise tests that all of the comparisons are significant.
