@@ -13,12 +13,6 @@ One of the benefits of using R to analyse data is gaining access to the incredib
 - **Portable**: Easily transport your projects from one computer to another, even across different platforms. renv makes it easy to install the packages your project depends on.
 - **Reproducible**: renv records the exact package versions you depend on, and ensures those exact versions are the ones that get installed wherever the project goes.
 
-renv can be installed onto your machine like any other package at any time during the lifecycle of your project. In the console:
-
-```{r, eval=FALSE}
-install.packages("renv")
-```
-
 To use renv in your project, in the console:
 
 ```{r, eval=FALSE}
