@@ -4,6 +4,8 @@ output: html_document
 ---
 See the [online workshop notes](https://tesaunders.github.io/reproducible-r/) to revisit the lesson in your own time.
 
+[Happy Git with R](https://happygitwithr.com/) is an online resource for getting R/RStudio set up to use Git & GitHub, and contains lots of useful information about working with R/RStudio and Git/GitHub on a daily basis. 
+
 [Version control with Git](https://uoa-eresearch.github.io/git-novice/) provides a proper introduction to version control using Git and GitHub. It focuses mostly on using Git from the commandline which is a good way to learn, but you'll probably be using Git from within RStudio most of the time - see the lesson for a supplemental episode on this topic.
 
 [R for Data Science](https://r4ds.hadley.nz/) is highly recommended as a general purpose introduction to R, and particularly the Tidyverse ecosystem of packages. 
