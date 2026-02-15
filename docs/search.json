@@ -88,7 +88,7 @@
     "href": "resources.html",
     "title": "Resources",
     "section": "",
-    "text": "See the online workshop notes to revisit the lesson in your own time.\nR for Data Science is highly recommended as a general purpose introduction to R, and particularly the Tidyverse ecosystem of packages.\nTidy data expands on some of the principles we talked about around keeping files and analyses organised.\nSee the renv documentation for an overview of how to use renv with your projects."
+    "text": "See the online workshop notes to revisit the lesson in your own time.\nVersion control with Git provides a proper introduction to version control using Git and GitHub. It focuses mostly on using Git from the commandline which is a good way to learn, but you’ll probably be using Git from within RStudio most of the time - see the lesson for a supplemental episode on this topic.\nR for Data Science is highly recommended as a general purpose introduction to R, and particularly the Tidyverse ecosystem of packages.\nTidy data expands on some of the principles we talked about around keeping files and analyses organised.\nSee the renv documentation for an overview of how to use renv with your projects.\nThe Turing Way is an online handbook outlining how to do reproducible, ethical and collaborative data science. It contains information on a wide variety of topics we have touched on in this workshop, including publishing data and code."
   },
   {
     "objectID": "05_publishing.html",
