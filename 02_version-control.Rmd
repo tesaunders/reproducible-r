@@ -36,6 +36,8 @@ library(dplyr)
 library(tidyr)
 library(ggplot2)
 library(purrr)
+library(car)
+library(rstatix)
 ```
 
 Save the file and open the Git pane in RStudio. You should see the script file listed there.Lets stage, commit, and enter a commit message such as "add package loading", commit, and push.

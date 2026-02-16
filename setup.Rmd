@@ -25,14 +25,14 @@ To download and install RStudio on a personal machine (requires administrator pr
 
 Open RStudio and install the following R packages by:
 
-- Selecting Tools > Install Packages > and entering `readr, dplyr, tidyr, ggplot2, purrr, renv, car` and select 'Install'.
+- Selecting Tools > Install Packages > and entering `readr, dplyr, tidyr, ggplot2, purrr, renv, car, rstatix` and select 'Install'.
 
 OR
 
 - Running the following command in the console:
 
 ```{r, eval=FALSE}
-install.packages(c("readr", "dplyr", "tidyr", "ggplot2", "purrr", "renv", "car"))
+install.packages(c("readr", "dplyr", "tidyr", "ggplot2", "purrr", "renv", "car", "rstatix"))
 ```
 
 # 4. Install Git
